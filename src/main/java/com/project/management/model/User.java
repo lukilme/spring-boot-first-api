@@ -1,23 +1,54 @@
 package com.project.management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  *
  */
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Size(min = 6, max = 100)
     private String name;
+
+    @NotBlank
+    @Email
     private String email;
+
+    @NotBlank
+    @Size(min = 8)
     private String password;
-    private String birthday;
+
+    @Past
+    private LocalDate birthday;
+    @NotBlank
     private String position;
 
-    public User(){}
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
-    public User(Long id, String name, String email, String password, String birthday, String position) {
-        this.id = id;
+    public User() {
+    }
+
+    public User(String name, String email, String password, LocalDate birthday, String position) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -70,11 +101,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -84,5 +115,13 @@ public class User implements Serializable {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
