@@ -41,10 +41,6 @@ public class User implements Serializable {
     @NotBlank
     private String position;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "client")
-    private List<Order> orders = new ArrayList<>();
-
     public User() {
     }
 
@@ -117,11 +113,4 @@ public class User implements Serializable {
         this.position = position;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 }
