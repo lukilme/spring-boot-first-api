@@ -1,6 +1,5 @@
 package com.project.management.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -9,8 +8,6 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,6 +27,7 @@ public class User implements Serializable {
 
     @NotBlank
     @Email
+    @Size(min = 8, max = 64)
     private String email;
 
     @NotBlank

@@ -2,10 +2,8 @@ package com.project.management.service;
 
 import com.project.management.model.User;
 import com.project.management.repository.UserRepository;
-import com.project.management.validator.UserValidator;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -55,7 +53,6 @@ public class UserService {
 
     @Transactional
     public User insert(User newUser) {
-        UserValidator.verifyCreateUser(newUser);
         return repository.save(newUser);
     }
 }
